@@ -33,6 +33,7 @@ const theme = {
   blueSoft6: "#48AFF1",
   blueSoft7: "#E5F2F7",
   blueSoft8: "#d9e3f2",
+  blueSoft9: "#E9F3FF",
 
   // Dark Blue palette
   darkBluePrimary: "#132D49",
