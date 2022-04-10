@@ -2,11 +2,9 @@ import styled from "styled-components";
 import theme from "../../constant/theme";
 
 export const WrapperListMessage = styled.div`
-  width: 400px;
+  width: 450px;
   height: 100vh;
-
   border: 1px solid ${theme.graySoft11};
-  overflow: scroll;
 `;
 
 export const HeaderListMessageWrap = styled.div`
@@ -25,13 +23,15 @@ export const HeaderListMessage = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
-  p {
+  & > p {
     font-size: 30px;
     font-weight: 600;
   }
 `;
 
 export const WrapIconHeader = styled.div`
+  display: flex;
+
   svg {
     padding: 10px;
     border-radius: 50%;
@@ -41,6 +41,19 @@ export const WrapIconHeader = styled.div`
 `;
 
 export const ListMessageContent = styled.div`
+  height: calc(100vh - 150px);
   margin-top: 24px;
   padding: 0 0 12px 12px;
+  overflow-y: scroll;
+`;
+
+export const IconContent = styled.div`
+  position: relative;
+  cursor: pointer;
+
+  &:hover{
+    svg{
+      color: ${({ theme }) => theme.graySoft13}
+    }
+  }
 `;
