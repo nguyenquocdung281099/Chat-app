@@ -3,11 +3,20 @@ import { BsSearch } from "react-icons/bs";
 
 import * as S from "./styles";
 
-const SearchForm = () => {
+interface SearchFormProps {
+  handleActiveForm: (value: boolean) => void
+}
+
+const SearchForm: React.FC<SearchFormProps> = ({ handleActiveForm }) => {
   return (
     <S.SearchFormWrap>
       <BsSearch />
-      <S.Input type='text' placeholder="Tìm kiếm trên Mesenger"/>
+      <S.Input
+        type="text"
+        placeholder="Tìm kiếm trên Mesenger"
+        onFocus={() => handleActiveForm(true)}
+        onBlur={() => handleActiveForm(false)}
+      />
     </S.SearchFormWrap>
   );
 };
