@@ -13,21 +13,18 @@ export const Wrapper = styled.div`
 `;
 
 export const UserInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
-`;
-
-export const UserAvatar = styled.img`
-  margin: 16px 0 12px;
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  border-radius: 50%;
+  margin-top: 16px;
 `;
 
 export const UserName = styled.p`
-  font-weight: bold;
-  font-size: 20px;
+  margin-top: 12px;
   padding: 0 16px;
+  font-weight: 600;
+  font-size: 17px;
 `;
 
 export const SettingGroup = styled.div`

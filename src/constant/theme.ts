@@ -90,6 +90,11 @@ const theme = {
   // Others palette
   blackSoft: "#25272C",
   brownMedium1: "#4D4F53",
+
+  // Responsive width
+  smallTabletWidth: "641px",
+  tabletWidth: "768px",
+  laptop: "1024px",
 };
 
 export default theme;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { BsRecordCircleFill, BsFillFileEarmarkTextFill, BsLink45Deg, BsBellFill } from "react-icons/bs";
 import { IoIosCloudOutline } from "react-icons/io";
 import { IoText, IoImagesOutline } from "react-icons/io5";
@@ -7,28 +7,46 @@ import { BiMessageRoundedX } from "react-icons/bi";
 import { MdBlock, MdReportProblem } from "react-icons/md";
 
 import Collapse from "../../component/Collapse";
+import Avatar from "common/Avatar";
+import ChangeThemeModal from "component/ChangeThemeModal";
 
 import * as S from "./styled";
 
+enum modalType {
+  changeTheme = "changeTheme",
+  changeEmoji = "changeEmoji",
+  editNickname = "editNickname",
+  muteNotifications = "muteNotifications",
+  ignoreMessages = "ignoreMessages",
+  block = "block",
+  report = "report",
+}
+
 const ConversationInformation: React.FC = () => {
+  const [state, setState] = useState<{
+    modal: modalType | "";
+  }>({ modal: "" });
+  const onShowModal = useCallback((e) => setState((s) => ({ ...s, modal: e.target.id })), []);
+  const onCloseModal = useCallback(() => setState((s) => ({ ...s, modal: "" })), []);
+
   return (
     <S.Wrapper>
       <S.UserInfo>
-        <S.UserAvatar src="https://scontent.fhan14-1.fna.fbcdn.net/v/t1.6435-1/118244176_2152507448228419_5331734896671917476_n.jpg?stp=dst-jpg_p100x100&_nc_cat=107&ccb=1-5&_nc_sid=7206a8&_nc_ohc=nNAPxG9UA54AX93cW7N&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.fhan14-1.fna&oh=00_AT_skkiE7gvrvcDAtvBbU4Ceoe-ydlv3C9KuwuUSRq0QfA&oe=6272C7C7" />
+        <Avatar url="https://tophinhanh.com/wp-content/uploads/2021/12/anh-avatar-dep-cho-con-gai.jpg" size={"80px"} />
         <S.UserName>Phước Trần</S.UserName>
       </S.UserInfo>
       <S.SettingGroup>
         <Collapse title="Customise chat">
           <S.SettingOption>
-            <li>
+            <li id="changeTheme" onClick={onShowModal}>
               <BsRecordCircleFill size={16} />
               Change theme
             </li>
-            <li>
+            <li id="changeEmoji" onClick={onShowModal}>
               <IoIosCloudOutline size={16} />
               Change emoji
             </li>
-            <li>
+            <li id="editNickname" onClick={onShowModal}>
               <IoText size={16} />
               Edit nicknames
             </li>
@@ -56,7 +74,7 @@ const ConversationInformation: React.FC = () => {
         </Collapse>
         <Collapse title="Privacy and support">
           <S.SettingOption>
-            <li>
+            <li id="muteNotifications" onClick={onShowModal}>
               <BsBellFill size={16} />
               Mute notifications
             </li>
@@ -64,11 +82,11 @@ const ConversationInformation: React.FC = () => {
               <BiMessageRoundedX size={16} />
               Ignore messages
             </li>
-            <li>
+            <li id="block" onClick={onShowModal}>
               <MdBlock size={16} />
               Block
             </li>
-            <li>
+            <li id="report" onClick={onShowModal}>
               <MdReportProblem size={16} />
               <div>
                 <p>Report</p>
@@ -78,6 +96,13 @@ const ConversationInformation: React.FC = () => {
           </S.SettingOption>
         </Collapse>
       </S.SettingGroup>
+      <ChangeThemeModal
+        show={state.modal === modalType.changeTheme}
+        onClose={onCloseModal}
+        onConfirm={() => {
+          onCloseModal();
+        }}
+      />
     </S.Wrapper>
   );
 };
