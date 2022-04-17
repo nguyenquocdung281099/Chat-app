@@ -46,6 +46,7 @@ const theme = {
   // Green palette
   greenMedium1: "#249688",
   greenMedium2: "#17BEBB",
+  greenMedium3: "#2F9A48",
 
   // white palette
   whitePrimary: "#FFFFFF",
