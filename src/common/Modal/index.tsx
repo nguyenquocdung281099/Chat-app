@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Portal from "../Portal/index";
 
 import { IoClose } from "react-icons/io5";
@@ -9,10 +9,19 @@ export interface IModalProps {
   show: boolean;
   title: string;
   onClose?: () => void;
-  children: React.ReactNode;
 }
 
 const Modal: React.FC<IModalProps> = ({ show, title, onClose, children }) => {
+  useEffect(() => {
+    if (show && onClose) {
+      const handleEscKey = (event: KeyboardEvent) => {
+        event.key === "Escape" && onClose();
+      };
+      window.addEventListener("keydown", handleEscKey);
+      return () => window.removeEventListener("keydown", handleEscKey);
+    }
+  }, [onClose, show]);
+
   return (
     <Portal>
       {show && (

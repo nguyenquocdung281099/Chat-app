@@ -1,13 +1,13 @@
 import React from "react";
 import moment from "moment";
-import Avatar from "common/Avatar";
+import Avatar from "src/common/Avatar";
 import { BsFillCheckCircleFill, BsCircle } from "react-icons/bs";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 
 import * as S from "./styles";
-import theme from "constant/theme";
-import { statusSentMessage } from "constant/const";
-import { Text } from "common/Text";
+import theme from "src/constant/theme";
+import { statusSentMessage } from "src/constant/const";
+import { Text } from "src/common/Text";
 interface MessageItemProps {
   name: string;
   content: string;
@@ -16,13 +16,7 @@ interface MessageItemProps {
   active: boolean;
 }
 
-const MessageItem: React.FC<MessageItemProps> = ({
-  name,
-  content,
-  status,
-  time,
-  active,
-}) => {
+const MessageItem: React.FC<MessageItemProps> = ({ name, content, status, time, active }) => {
   const renderIconStatus = (status: number) => {
     switch (status) {
       case statusSentMessage.waiting:
@@ -39,10 +33,7 @@ const MessageItem: React.FC<MessageItemProps> = ({
   };
   return (
     <S.MessageItemWrap className={active ? "active" : ""}>
-      <Avatar
-        url="https://tophinhanh.com/wp-content/uploads/2021/12/anh-avatar-dep-cho-con-gai.jpg"
-        size={"50px"}
-      />
+      <Avatar url="https://tophinhanh.com/wp-content/uploads/2021/12/anh-avatar-dep-cho-con-gai.jpg" size={"50px"} />
       <S.ContentMessage>
         <S.ContentMessageTop>
           <Text truncate font-size={20} width={"270px"}>
@@ -53,9 +44,7 @@ const MessageItem: React.FC<MessageItemProps> = ({
           <Text truncate width={"190px"} color={theme.grayPrimary1}>
             {content}
           </Text>
-          <Text color={theme.grayPrimary1}>
-            {moment().fromNow(true)}
-          </Text>
+          <Text color={theme.grayPrimary1}>{moment().fromNow(true)}</Text>
         </S.ContentMessageBottom>
       </S.ContentMessage>
       <S.StatusMessage>{renderIconStatus(status)}</S.StatusMessage>

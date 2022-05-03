@@ -20,6 +20,16 @@ export const ContentMessageHeader = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.graySoft11};
 `;
 
+export const SearchMessageForm = styled.div`
+  padding: 10px 16px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transform: translateY(100%);
+  border-bottom: 1px solid ${({ theme }) => theme.graySoft12};
+`;
+
 export const ContentMessageHeaderLeft = styled.div`
   display: flex;
   align-items: center;
@@ -71,7 +81,7 @@ export const EditorMessageArea = styled.div<{ isHaveImage: boolean }>`
   flex-direction: column;
 
   & > div {
-    ${({isHaveImage}) =>
+    ${({ isHaveImage }) =>
       isHaveImage
         ? css`
             border-top-left-radius: 20px;
