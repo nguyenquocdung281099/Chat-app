@@ -49,6 +49,9 @@ const ListMessage = () => {
             <S.IconContent>
               <FiEdit size={20} />
             </S.IconContent>
+            <BsThreeDots size={20} />
+           
+            <FiEdit size={20} />
           </S.WrapIconHeader>
         </S.HeaderListMessage>
         <SearchForm

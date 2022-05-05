@@ -20,7 +20,7 @@ export const MessageItemWrap = styled.div`
 export const ContentMessage = styled.div`
   margin-left: 10px;
   text-align: start;
-  width: 300px;
+  width: 290px;
 `;
 
 export const ContentMessageTop = styled.div`
