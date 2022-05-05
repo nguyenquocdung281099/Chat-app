@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
-import Modal from "common/Modal";
-import Button from "common/Button";
-import Row from "common/Row";
-import Col from "common/Col";
+import Modal from "src/common/Modal";
+import Button from "src/common/Button";
+import Row from "src/common/Row";
+import Col from "src/common/Col";
 import { themeColors } from "./constant";
 
 import * as S from "./styled";

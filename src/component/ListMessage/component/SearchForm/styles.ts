@@ -1,4 +1,3 @@
-import theme from "constant/theme";
 import styled from "styled-components";
 
 export const SearchFormWrap = styled.div`
@@ -7,7 +6,7 @@ export const SearchFormWrap = styled.div`
   align-items: center;
 
   padding: 10px;
-  background: ${theme.graySoft11};
+  background: ${({ theme }) => theme.graySoft11};
   border-radius: 15px;
 `;
 

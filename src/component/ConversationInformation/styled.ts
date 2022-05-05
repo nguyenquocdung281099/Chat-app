@@ -53,7 +53,8 @@ export const SettingOption = styled.ul`
       background: rgba(0, 0, 0, 0.4);
     }
 
-    > svg {
+    > svg,
+    > span {
       margin-right: 14px;
     }
 

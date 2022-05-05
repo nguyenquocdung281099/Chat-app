@@ -1,22 +1,21 @@
-import Avatar from "common/Avatar";
+import Avatar from "src/common/Avatar";
 import React, { memo, useEffect, useRef, useState } from "react";
 import { IoCall } from "react-icons/io5";
 import { BsFillCameraVideoFill, BsFileEarmarkImageFill } from "react-icons/bs";
-import {
-  AiOutlineExclamation,
-  AiFillPlusCircle,
-  AiOutlineFileGif,
-  AiOutlineClose,
-} from "react-icons/ai";
+import { AiOutlineExclamation, AiFillPlusCircle, AiOutlineFileGif, AiOutlineClose } from "react-icons/ai";
 import _ from "lodash";
 
 import * as S from "./styles";
-import { Text } from "common/Text";
-import theme from "constant/theme";
+import { Text } from "src/common/Text";
+import theme from "src/constant/theme";
+import SearchForm from "./component/SearchForm";
 
-interface ContentMessageProps {}
+interface ContentMessageProps {
+  showSearchMessage: boolean;
+  onCloseSearchMessage: () => void;
+}
 
-const ContentMessage: React.FC<ContentMessageProps> = () => {
+const ContentMessage: React.FC<ContentMessageProps> = ({ showSearchMessage, onCloseSearchMessage }) => {
   const [message, setMessage] = useState();
 
   const uploadFileRef = useRef(null);
@@ -90,13 +89,15 @@ const ContentMessage: React.FC<ContentMessageProps> = () => {
         </S.ContentMessageHeaderLeft>
         <S.ContentMessageHeaderRight>
           <IoCall size={25} color={theme.bluePrimary2} />
-          <BsFillCameraVideoFill
-            size={25}
-            color={theme.bluePrimary2}
-          ></BsFillCameraVideoFill>
+          <BsFillCameraVideoFill size={25} color={theme.bluePrimary2}></BsFillCameraVideoFill>
 
           <AiOutlineExclamation size={25} color={theme.bluePrimary2} />
         </S.ContentMessageHeaderRight>
+        {showSearchMessage && (
+          <S.SearchMessageForm>
+            <SearchForm onSearch={(value) => alert(value)} onCloseSearchMessage={onCloseSearchMessage} />
+          </S.SearchMessageForm>
+        )}
       </S.ContentMessageHeader>
       <S.ContentMessageContain></S.ContentMessageContain>
       <S.EditorMessage>
@@ -123,12 +124,7 @@ const ContentMessage: React.FC<ContentMessageProps> = () => {
               ))}
             </S.ImagePreview>
           )}
-          <input
-            type="file"
-            className="uploadFile"
-            accept="image/*"
-            id="uploadImage"
-          />
+          <input type="file" className="uploadFile" accept="image/*" id="uploadImage" />
           <input type="text" placeholder="Aa" className="editor-message" />
         </S.EditorMessageArea>
       </S.EditorMessage>

@@ -1,14 +1,17 @@
 import React, { useCallback, useState } from "react";
 import { BsRecordCircleFill, BsFillFileEarmarkTextFill, BsLink45Deg, BsBellFill } from "react-icons/bs";
-import { IoIosCloudOutline } from "react-icons/io";
 import { IoText, IoImagesOutline } from "react-icons/io5";
 import { ImSearch } from "react-icons/im";
-import { BiMessageRoundedX } from "react-icons/bi";
-import { MdBlock, MdReportProblem } from "react-icons/md";
+import { MdBlock } from "react-icons/md";
+import { Emoji } from "emoji-mart";
 
-import Collapse from "../../component/Collapse";
-import Avatar from "common/Avatar";
-import ChangeThemeModal from "component/ChangeThemeModal";
+import Avatar from "src/common/Avatar";
+import Collapse from "src/common/Collapse";
+import ChangeThemeModal from "../ChangeThemeModal";
+import ChangeEmojiModal from "../ChangeEmojiModal";
+import EditNicknamesModal from "../EditNicknamesModal";
+import MuteNotificationModal from "../MuteNotificationModal";
+import BlockModal from "../BlockModal";
 
 import * as S from "./styled";
 
@@ -17,12 +20,14 @@ enum modalType {
   changeEmoji = "changeEmoji",
   editNickname = "editNickname",
   muteNotifications = "muteNotifications",
-  ignoreMessages = "ignoreMessages",
   block = "block",
-  report = "report",
 }
 
-const ConversationInformation: React.FC = () => {
+interface IConversationInformationProps {
+  onToggleSearchMessage: () => void;
+}
+
+const ConversationInformation: React.FC<IConversationInformationProps> = ({ onToggleSearchMessage }) => {
   const [state, setState] = useState<{
     modal: modalType | "";
   }>({ modal: "" });
@@ -33,26 +38,26 @@ const ConversationInformation: React.FC = () => {
     <S.Wrapper>
       <S.UserInfo>
         <Avatar url="https://tophinhanh.com/wp-content/uploads/2021/12/anh-avatar-dep-cho-con-gai.jpg" size={"80px"} />
-        <S.UserName>Phước Trần</S.UserName>
+        <S.UserName>Nguyễn Quốc Dũng</S.UserName>
       </S.UserInfo>
       <S.SettingGroup>
         <Collapse title="Customise chat">
           <S.SettingOption>
             <li id="changeTheme" onClick={onShowModal}>
-              <BsRecordCircleFill size={16} />
+              <BsRecordCircleFill color={"red"} size={16} />
               Change theme
             </li>
             <li id="changeEmoji" onClick={onShowModal}>
-              <IoIosCloudOutline size={16} />
+              <Emoji emoji="cloud" size={16} />
               Change emoji
             </li>
             <li id="editNickname" onClick={onShowModal}>
               <IoText size={16} />
               Edit nicknames
             </li>
-            <li>
+            <li onClick={onToggleSearchMessage}>
               <ImSearch size={16} />
-              Search index conversion
+              Search in conversion
             </li>
           </S.SettingOption>
         </Collapse>
@@ -78,20 +83,9 @@ const ConversationInformation: React.FC = () => {
               <BsBellFill size={16} />
               Mute notifications
             </li>
-            <li>
-              <BiMessageRoundedX size={16} />
-              Ignore messages
-            </li>
             <li id="block" onClick={onShowModal}>
               <MdBlock size={16} />
               Block
-            </li>
-            <li id="report" onClick={onShowModal}>
-              <MdReportProblem size={16} />
-              <div>
-                <p>Report</p>
-                <p>Give feedback and report the conversation</p>
-              </div>
             </li>
           </S.SettingOption>
         </Collapse>
@@ -102,6 +96,46 @@ const ConversationInformation: React.FC = () => {
         onConfirm={() => {
           onCloseModal();
         }}
+      />
+      <ChangeEmojiModal
+        show={state.modal === modalType.changeEmoji}
+        emoji={"cloud"}
+        onClose={onCloseModal}
+        onConfirm={(value: any) => {
+          onCloseModal();
+        }}
+      />
+      <EditNicknamesModal
+        show={state.modal === modalType.editNickname}
+        myData={{
+          imgUrl: "https://tophinhanh.com/wp-content/uploads/2021/12/anh-avatar-dep-cho-con-gai.jpg",
+          nickname: "Charles",
+          username: "Trung Lê",
+        }}
+        friendData={{
+          imgUrl: "https://tophinhanh.com/wp-content/uploads/2021/12/anh-avatar-dep-cho-con-gai.jpg",
+          nickname: "b0y l4nk lunq",
+          username: "Nguyễn Quốc Dũng",
+        }}
+        onSaveMyNickname={(value: string) => alert(value)}
+        onSaveFriendNickname={(value: string) => alert(value)}
+        onClose={onCloseModal}
+      />
+      <MuteNotificationModal
+        show={state.modal === modalType.muteNotifications}
+        onConfirm={(muteType, muteTime) => {
+          alert(`muteType: ${muteType}, muteTime: ${muteTime}`);
+          onCloseModal();
+        }}
+        onClose={onCloseModal}
+      />
+      <BlockModal
+        show={state.modal === modalType.block}
+        onConfirm={() => {
+          alert("blocked");
+          onCloseModal();
+        }}
+        onClose={onCloseModal}
       />
     </S.Wrapper>
   );

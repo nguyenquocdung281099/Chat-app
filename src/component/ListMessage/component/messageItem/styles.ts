@@ -1,4 +1,3 @@
-import theme from "constant/theme";
 import styled from "styled-components";
 
 export const MessageItemWrap = styled.div`
@@ -9,11 +8,11 @@ export const MessageItemWrap = styled.div`
   border-radius: 10px;
 
   &:hover {
-    background: ${theme.graySoft12};
+    background: ${({ theme }) => theme.graySoft12};
   }
 
-  &.active{
-    background: ${theme.blueSoft9};
+  &.active {
+    background: ${({ theme }) => theme.blueSoft9};
   }
 `;
 
@@ -31,6 +30,4 @@ export const ContentMessageBottom = styled.div`
   display: flex;
 `;
 
-export const StatusMessage = styled.div`
-
-`;
+export const StatusMessage = styled.div``;
