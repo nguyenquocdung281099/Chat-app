@@ -4,8 +4,7 @@ export const ContentMessageWrapper = styled.div`
   position: relative;
   width: calc(100% - 380px - 400px);
   min-width: 600px;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  overflow: hidden;
 `;
 
 export const ContentMessageHeader = styled.div`
@@ -36,7 +35,6 @@ export const ContentMessageHeaderLeft = styled.div`
 `;
 
 export const ContentMessageHeaderNameAndStatus = styled.div`
-  margin-left: 15px;
   text-align: start;
 `;
 
@@ -64,7 +62,6 @@ export const EditorMessage = styled.div`
   bottom: 20px;
   display: flex;
   align-items: flex-end;
-  padding: 10px;
   & svg {
     margin: 3px;
     cursor: pointer;
@@ -76,9 +73,9 @@ export const EditorMessage = styled.div`
 `;
 
 export const EditorMessageArea = styled.div<{ isHaveImage: boolean }>`
-  width: 75%;
   display: flex;
   flex-direction: column;
+  width: 80%;
 
   & > div {
     ${({ isHaveImage }) =>
@@ -93,14 +90,13 @@ export const EditorMessageArea = styled.div<{ isHaveImage: boolean }>`
           `}
   }
 
-  & > input {
+  & > textarea {
     padding: 10px;
-    margin-left: 15px;
     border-radius: 20px;
-    width: 100%;
     border: none;
     background: ${({ theme }) => theme.graySoft11};
     outline: none;
+    resize: none;
 
     &:hover {
       outline: none;
@@ -159,4 +155,8 @@ export const ImagePreviewItem = styled.img`
   object-fit: cover;
   border-radius: 10px;
   margin: 5px;
+`;
+
+export const EditorMessageLeft = styled.div`
+  width: 15%;
 `;
