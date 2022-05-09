@@ -102,6 +102,8 @@ const ConversationInformation: React.FC<IConversationInformationProps> = ({ onTo
         emoji={"cloud"}
         onClose={onCloseModal}
         onConfirm={(value: any) => {
+          console.log({value});
+          
           onCloseModal();
         }}
       />
